@@ -35,6 +35,8 @@ Instructions:
 
     Your code goes here!
      */
+    return fetch(url,{method:'get'});
+
   }
 
   /**
@@ -48,6 +50,8 @@ Instructions:
 
     Your code goes here!
      */
+    return get(url).then(function(rp){return rp.json();});
+
   }
 
   window.addEventListener('WebComponentsReady', function() {
@@ -58,6 +62,14 @@ Instructions:
 
     Your code goes here too!
      */
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+    .then(function(rp){
+      addSearchHeader(rp.query);
+      console.log(rp);
+    })
+    .catch(function(error){
+      addSearchHeader("unknown");
+      console.log(error);
+    })
   });
 })(document);
